@@ -7,12 +7,31 @@ const app = express();//app contain all the functionalities of express
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+var contactList = [
+    {
+        name : "Arpan",
+        phone : 1111111111
+    },
+    {
+        name : "Tony Stark",
+        phone : 1234567890
+    },
+    {
+        name : "Coding Ninjas",
+        phone : 3434342354
+    }
+]
+
 //app.get('/') is like a controller
 app.get('/', function(req, res){
     // console.log(req);
     // res.send('<h1>Cool, it is running or is it?</h1>');
 
-    return res.render('home', {title : "I am flying"});/* res.render() for ejs files i.e dynamic files, res.send() for static html files */
+    return res.render('home', {
+        title : "I am flying",
+        contact_list : contactList
+    });
+    /* res.render() for ejs files i.e dynamic files, res.send() for static html files */
 });
 
 /* route is practice, In practise.ejs there is a dynamic title => whose value we're sending from here which is "let us play with ejs" */
