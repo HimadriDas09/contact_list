@@ -43,6 +43,7 @@ app.get('/practice', function(req, res){
 
 app.post('/create-contact', function(req, res){
     return res.redirect('/practice');
+    /* res.redirect => redirects us to an url or a route */
 })
 
 app.listen(port, function(err){
