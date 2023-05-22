@@ -46,7 +46,7 @@ var contactList = [
 
 //app.get('/') is like a controller
 app.get('/', function(req, res){
-    console.log('from get controller for route / : ', req.myName);
+    // console.log('from get controller for route / : ', req.myName);
     // console.log(req);
     // res.send('<h1>Cool, it is running or is it?</h1>');
 
