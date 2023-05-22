@@ -4,6 +4,12 @@ const path = require('path');
 const port = 8000;
 const app = express();//app contain all the functionalities of express
 
+/*using a body parser to parse the encoded form data from request, app.use rep use of middleware*/
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+    extended : false
+}));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -42,8 +48,11 @@ app.get('/practice', function(req, res){
 });
 
 app.post('/create-contact', function(req, res){
-    return res.redirect('/practice');
+    // return res.redirect('/practice');
     /* res.redirect => redirects us to an url or a route */
+    contactList.push(req.body);
+
+    return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
 })
 
 app.listen(port, function(err){
