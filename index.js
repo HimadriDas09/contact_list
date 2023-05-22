@@ -4,6 +4,19 @@ const path = require('path');
 const port = 8000;
 const app = express();//app contain all the functionalities of express
 
+//middleware 1
+app.use(function(req, res, next){
+    req.myName = 'himadri';//manipulating the req object
+    // console.log("middleware 1 called");
+    next();
+})
+//middleware 2
+app.use(function(req,res, next){
+    console.log('req.myName from md2 : ',req.myName);
+    // console.log('middleware 2 called');
+    next();
+})
+
 /*using a body parser to parse the encoded form data from request, app.use rep use of middleware*/
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
@@ -30,6 +43,7 @@ var contactList = [
 
 //app.get('/') is like a controller
 app.get('/', function(req, res){
+    console.log('from get controller for route / : ', req.myName);
     // console.log(req);
     // res.send('<h1>Cool, it is running or is it?</h1>');
 
