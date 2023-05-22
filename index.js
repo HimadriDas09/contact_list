@@ -4,18 +4,21 @@ const path = require('path');
 const port = 8000;
 const app = express();//app contain all the functionalities of express
 
+app.use(express.static('assets')); /*to use static files => i.e all our .js, .css files will be stored over there only => it will look for the static files in 'assets' */
+
+
 //middleware 1
-app.use(function(req, res, next){
-    req.myName = 'himadri';//manipulating the req object
-    // console.log("middleware 1 called");
-    next();
-})
-//middleware 2
-app.use(function(req,res, next){
-    console.log('req.myName from md2 : ',req.myName);
-    // console.log('middleware 2 called');
-    next();
-})
+// app.use(function(req, res, next){
+//     req.myName = 'himadri';//manipulating the req object
+//     // console.log("middleware 1 called");
+//     next();
+// })
+// //middleware 2
+// app.use(function(req,res, next){
+//     console.log('req.myName from md2 : ',req.myName);
+//     // console.log('middleware 2 called');
+//     next();
+// })
 
 /*using a body parser to parse the encoded form data from request, app.use rep use of middleware*/
 const bodyParser = require('body-parser');
