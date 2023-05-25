@@ -72,6 +72,13 @@ app.post('/create-contact', function(req, res){
     return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
 })
 
+app.get('/delete-contact', function(req,res){
+    console.log(req.query);
+    let phone = req.query.phone;
+    // console.log(req.params);
+    // let phone = req.params.phone;
+})
+
 app.listen(port, function(err){
     if(err){
         console.log('error is encountered', err);

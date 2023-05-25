@@ -19,6 +19,11 @@
                     <li class = "list-items">
                         <p><%= i.name %></p>
                         <p><%= i.phone %></p>
+                        <div class="delete-button">
+                            <a href="/delete-contact/?phone=<%= i.phone %>&name=<%= i.name %>">
+                                <i class="fa-solid fa-rectangle-xmark"></i>
+                            </a>
+                        </div>
                     </li>
                 <% } %>
             </ul>
