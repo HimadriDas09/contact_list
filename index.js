@@ -72,11 +72,20 @@ app.post('/create-contact', function(req, res){
     return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
 })
 
+//for deleting a contact
 app.get('/delete-contact', function(req,res){
-    console.log(req.query);
+    //get the query from the url
     let phone = req.query.phone;
     // console.log(req.params);
     // let phone = req.params.phone;
+
+    let contactIndex = contactList.findIndex(contact => contact.phone == phone);
+
+    if(contactIndex != -1){
+        contactList.splice(contactIndex, 1);
+    }
+
+    return res.redirect('back');
 })
 
 app.listen(port, function(err){
