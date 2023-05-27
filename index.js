@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
-
 const port = 8000;
+
+const db = require('./config/mongoose');//db to access the db
+const Contact = require('./models/contact');//Contact is used to populate a collection
+
 const app = express();//app contain all the functionalities of express
 
 app.use(express.static('assets')); /*to use static files => i.e all our .js, .css files will be stored over there only => it will look for the static files in 'assets' */
