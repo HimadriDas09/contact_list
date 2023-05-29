@@ -70,9 +70,22 @@ app.get('/practice', function(req, res){
 app.post('/create-contact', function(req, res){
     // return res.redirect('/practice');
     /* res.redirect => redirects us to an url or a route */
-    contactList.push(req.body);
 
-    return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
+    // contactList.push(req.body);
+    Contact.create({
+        name : req.body.name,
+        phone : req.body.phone
+    })//this returns a promise => so handle it rather than calling a cb fn
+    .then((newContact) => {
+        console.log('*******', newContact);
+        return res.redirect('back');
+    })
+    .catch((err) => {
+        console.log('error in creating a contact!');
+        return;
+    })
+    
+    // return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
 })
 
 //for deleting a contact
