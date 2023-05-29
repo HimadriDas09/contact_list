@@ -53,10 +53,22 @@ app.get('/', function(req, res){
     // console.log(req);
     // res.send('<h1>Cool, it is running or is it?</h1>');
 
-    return res.render('home', {
-        title : "I am flying",
-        contact_list : contactList
-    });
+    Contact.find({})//returns a promise
+    .then((contacts) => {
+        return res.render('home', {
+            title : "Contacts List",
+            contact_list : contacts
+        });
+    })
+    .catch((err) => {
+        console.log('Error in fetching contacts from db');
+        return;
+    })
+
+    // return res.render('home', {
+    //     title : "I am flying",
+    //     contact_list : contactList
+    // });
     /* res.render() for ejs files i.e dynamic files, res.send() for static html files */
 });
 
