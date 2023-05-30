@@ -53,7 +53,9 @@ app.get('/', function(req, res){
     // console.log(req);
     // res.send('<h1>Cool, it is running or is it?</h1>');
 
-    Contact.find({})//returns a promise
+
+    //returns a promise => we're quering all the documents from db and if successful then passing all the contacts to the home.ejs => so it has an id(primary key).
+    Contact.find({})
     .then((contacts) => {
         return res.render('home', {
             title : "Contacts List",
@@ -84,6 +86,8 @@ app.post('/create-contact', function(req, res){
     /* res.redirect => redirects us to an url or a route */
 
     // contactList.push(req.body);
+
+    //we're creating a document in the db
     Contact.create({
         name : req.body.name,
         phone : req.body.phone
@@ -100,20 +104,33 @@ app.post('/create-contact', function(req, res){
     // return res.redirect('back'); // instead of res.redirect('/') i.e redirecting to default route and res.redirect('back') -> redirecting to the route from where you asked for 'create-contact'
 })
 
-//for deleting a contact
+//for deleting a contact => when with db => deleting form db via unique id, else from contactList via phone
 app.get('/delete-contact', function(req,res){
-    //get the query from the url
-    let phone = req.query.phone;
-    // console.log(req.params);
-    // let phone = req.params.phone;
+    //get the id from query in the url.
+    let id = req.query.id;
 
-    let contactIndex = contactList.findIndex(contact => contact.phone == phone);
+    //find the contact in db using id and delete
+    Contact.findByIdAndDelete(id)
+    .then(() => {
+        return res.redirect('back');
+    })
+    .catch((err) => {
+        console.log('error in deleting an object from database');
+        return;
+    })
 
-    if(contactIndex != -1){
-        contactList.splice(contactIndex, 1);
-    }
+    // //get the query from the url
+    // let phone = req.query.phone;
+    // // console.log(req.params);
+    // // let phone = req.params.phone;
 
-    return res.redirect('back');
+    // let contactIndex = contactList.findIndex(contact => contact.phone == phone);
+
+    // if(contactIndex != -1){
+    //     contactList.splice(contactIndex, 1);
+    // }
+
+    // return res.redirect('back');
 })
 
 app.listen(port, function(err){
